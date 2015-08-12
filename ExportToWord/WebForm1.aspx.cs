@@ -10,7 +10,7 @@ namespace ExportToWord
     {
 
 
-        protected void Page_Load(object sender, System.EventArgs e)
+        public System.Data.DataTable GetData()
         {
             System.Data.DataTable dt = new System.Data.DataTable();
             dt.Columns.Add("Name", typeof(string));
@@ -30,8 +30,12 @@ namespace ExportToWord
                 dt.Rows.Add(dr);
             }
 
+            return dt;
+        }
 
 
+        protected void Page_Load(object sender, System.EventArgs e)
+        {
             LocalReport report = new LocalReport();
             report.ReportPath = "Report1.rdlc";
             report.ReportPath = "SSRSReport.rdl";
@@ -40,7 +44,7 @@ namespace ExportToWord
             ReportDataSource rds = new ReportDataSource();
             rds.Name = "DataSet1";//This refers to the dataset name in the RDLC file
             // rds.Value = EmployeeRepository.GetAllEmployees();
-            rds.Value = dt;
+            rds.Value = GetData();
             report.DataSources.Add(rds);
 
             string format = GetExportFormatString(ExportFormat.Word);
@@ -88,6 +92,39 @@ namespace ExportToWord
         } // End Enum ExportFormat
 
 
+
+        public static int SetSQLServerVersion()
+        { 
+            string strSQL = @"
+DECLARE @tV AS integer; 
+SET @tV = (SELECT TOP 1 FC_Value FROM T_FMS_Configuration WHERE FC_Key = N'ReportExecution_SSRSVersion'); 
+
+IF (@tV IS NOT NULL AND @tV > 2000) 
+	BEGIN 
+		SELECT @tV 
+	END 
+ELSE 
+	BEGIN 
+		DECLARE @ver nvarchar(128); 
+		SET @ver = CAST( SERVERPROPERTY('ProductVersion') AS nvarchar); 
+		SET @ver = SUBSTRING(@ver, 1, CHARINDEX('.', @ver) - 1); 
+		
+		IF ( @ver = N'9' ) 
+		   SELECT 2005 
+		ELSE IF ( @ver = N'10' ) 
+		   SELECT 2008 
+		ELSE 
+		   SELECT 2012 
+	END 
+";
+
+            System.Diagnostics.Trace.WriteLine(strSQL);
+
+            // return 2005;
+            // return 2012;
+            return 2008;
+        }
+
         /// <summary>
         /// Gets the string export format of the specified enum.
         /// </summary>
@@ -95,11 +132,8 @@ namespace ExportToWord
         /// <returns>enum equivalent string export format</returns>
         public static string GetExportFormatString(ExportFormat f)
         {
-            int V_SQLServer = 2008;
-            // V_SQLServer = 2012;
-
-            // if (V_SQLServer == null | V_SQLServer == 0) SetSQLServerVersion();
-
+            int V_SQLServer = SetSQLServerVersion();
+            
             switch (f)
             {
                 case ExportFormat.XML:
