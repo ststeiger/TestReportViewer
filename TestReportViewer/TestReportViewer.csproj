@@ -63,6 +63,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Libs\Microsoft.ReportViewer.Common.dll" />
+    <Content Include="Libs\Microsoft.ReportViewer.DataVisualization.DLL" />
+    <Content Include="Libs\Microsoft.ReportViewer.ProcessingObjectModel.DLL" />
     <Content Include="Libs\Microsoft.ReportViewer.WebForms.dll" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
