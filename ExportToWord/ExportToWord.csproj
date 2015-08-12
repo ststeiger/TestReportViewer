@@ -49,9 +49,20 @@
       <HintPath>Libs\Microsoft.ReportViewer.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -71,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libs\Microsoft.ReportViewer.Common.dll" />
+    <Content Include="Libs\Microsoft.ReportViewer.DataVisualization.DLL" />
+    <Content Include="Libs\Microsoft.ReportViewer.ProcessingObjectModel.DLL" />
     <Content Include="Libs\Microsoft.ReportViewer.WebForms.dll" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
